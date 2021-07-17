@@ -13,7 +13,6 @@ const Container = (props) => {
                 setList(rs.data);
                 console.log('list' , list);
                 console.log('list.title' , list.seq);
-                console.log('list.title' , list.title);
                 
             })
             .catch(err => {

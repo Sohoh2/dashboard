@@ -4,9 +4,14 @@ import axios from 'axios';
 
 
 const Container = (props) => {
+    const { history } = props;
+
 
     const [title, setTitle] = useState('');
     const [contents, setContents] = useState('');
+    // const [registerAt, setRegistserAt] = useState({now})
+
+    const registerAt = new Date();
 
 
     const newPostBtn = () =>{
@@ -14,6 +19,7 @@ const Container = (props) => {
         const insertData = {
             title: `${title}`,
             content: `${contents}`,
+            registerAt : `${registerAt}`
         };
 
         
@@ -24,6 +30,8 @@ const Container = (props) => {
         .catch(err => {
             console.log(err);            
         })
+        history.push('/main')
+
 
     }
 
@@ -31,8 +39,12 @@ const Container = (props) => {
 
     return(
         <Presenter {...props} 
-        newPostBtn={newPostBtn} 
-  
+        newPostBtn={newPostBtn}
+        title = {title}
+        setTitle = {setTitle} 
+ 
+        contents = {contents}
+        setContents = {setContents}
         />
 
             

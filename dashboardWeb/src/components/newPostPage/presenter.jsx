@@ -19,11 +19,11 @@ export default Presenter;
 
 const PostForm = (props) => {
 
-    const {newPostBtn} = props
+    const {newPostBtn, title, setContents, setTitle, contents} = props
 
-    const [title, setTitle] = useState('');
-    const [contents, setConstents] = useState('');
+
     console.log(contents);
+    console.log(title)
 
   return (
     <>
@@ -74,7 +74,7 @@ const PostForm = (props) => {
             width:'40rem',
             fontSize: '1.2rem' }} 
             value={contents}
-            onChange={(e) => setConstents(e.target.value)}
+            onChange={(e) => setContents(e.target.value)}
 
             />
         </Form.Item>

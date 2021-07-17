@@ -24,10 +24,7 @@ export default Presenter;
 
 const List = (props) => {
 
-    const {list} = props
-
-    const [title,setTitle] = useState()
-    
+    const {list} = props    
     const columns = [
         {
           title: 'SEQ',
@@ -55,13 +52,16 @@ const List = (props) => {
 
 
       const data = [];
+
       {list.map((li,idx) =>
         data.push({
             seq:`${li.seq}`,
             title: `${li.title}`,
+            // title: `${<Link to={`/board/${li.seq}`}>{li.title}</Link>}`,
             registerAt: `${li.register_at}`,
             updatedAt:`${li.update_at}`
-        }))}
+        }))
+    }
         
         
      
