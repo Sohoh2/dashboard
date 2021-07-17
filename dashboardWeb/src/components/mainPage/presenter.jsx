@@ -23,6 +23,11 @@ const Presenter = (props) => {
 export default Presenter;
 
 const List = (props) => {
+
+    const {list} = props
+    // console.log(list)
+
+    const [title,setTitle] = useState()
     
     const columns = [
         {
@@ -52,45 +57,21 @@ const List = (props) => {
             width: 120,
           },
       ];
-      
-      const data = [
-        {
-          key: '1',
-          seq:'1',
-          title: 'John Brown',
-          registerAt: '2021-7-17',
-          updatedAt:'2021-7-18'
-        },
-        {
-          key: '2',
-          seq:'2',
-          title: 'Jim Green',
-          registerAt: '2021-7-17',
-          updatedAt:'2021-7-18'
-        },
-        {
-          key: '3',
-          seq:'3',
-          title: 'Joe Black',
-          registerAt: '2021-7-17',
-          updatedAt:'2021-7-18'
 
-        },
-      ];
 
-      useEffect(()=>{
+      const data = [];
+for (let i = 0; i < 10; i++) {
+  data.push({
+    key: 'title',
+    seq:'3',
+    title: `${list}`,
+    registerAt: `123`,
+    updatedAt:'2021-7-18'
+  });
+}
 
-        axios.get("http://localhost:8080/board")
-        .then(rs => {
-            console.log(rs.data);
-            alert(rs.data);
-        })
-        .catch(err => {
-            console.log(err);
-            alert(err);
-        })
-    },[])
-      
+
+    
 
     return (
         <>

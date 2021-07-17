@@ -1,9 +1,29 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Presenter from './presenter';
+import axios from 'axios';
+
 
 const Container = (props) => {
+    const [list, setList] = useState([]);
+
+        useEffect(()=>{
+
+            axios.get("http://localhost:8080/boards")
+            .then(rs => {
+                console.log(rs);
+                setList(rs.data);
+                console.log(list[0].title)
+            })
+            .catch(err => {
+                console.log(err);
+                alert(err);
+                
+            })
+        },[])
+        
     return(
-        <Presenter {...props}/>
+
+        <Presenter {...props} list={list}/>
 
             
     )};
