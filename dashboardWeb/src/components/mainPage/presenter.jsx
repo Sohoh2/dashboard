@@ -14,7 +14,7 @@ const Presenter = (props) => {
                     title="Get support"
                     subTitle="24 hours a day, 7 days a week."
                 />
-                <List/>
+                <List  {...props}/>
             </Container>
         </>
     );
@@ -25,7 +25,6 @@ export default Presenter;
 const List = (props) => {
 
     const {list} = props
-    // console.log(list)
 
     const [title,setTitle] = useState()
     
@@ -33,7 +32,6 @@ const List = (props) => {
         {
           title: 'SEQ',
           dataIndex: 'seq',
-          key: 'seq',
           width: 30,
 
         },
@@ -41,35 +39,32 @@ const List = (props) => {
         {
           title: 'TITLE',
           dataIndex: 'title',
-          key: 'title',
         },
 
         {
           title: 'REDISTER AT',
           dataIndex: 'registerAt',
-          key: 'registerAt',
           width: 120,
         },
         {
             title: 'UPDATED AT',
             dataIndex: 'updatedAt',
-            key: 'updatedAt',
             width: 120,
           },
       ];
 
 
       const data = [];
-for (let i = 0; i < 10; i++) {
-  data.push({
-    key: 'title',
-    seq:'3',
-    title: `${list}`,
-    registerAt: `123`,
-    updatedAt:'2021-7-18'
-  });
-}
-
+      {list.map((li,idx) =>
+        data.push({
+            seq:`${li.seq}`,
+            title: `${li.title}`,
+            registerAt: `${li.register_at}`,
+            updatedAt:`${li.update_at}`
+        }))}
+        
+        
+     
 
     
 
@@ -85,7 +80,9 @@ for (let i = 0; i < 10; i++) {
             </Button>
             </Link>
         </div>
+
         <Table columns={columns} dataSource={data} />
+        
 
 
         </>
