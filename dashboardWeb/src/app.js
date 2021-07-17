@@ -1,12 +1,13 @@
 import axios from 'axios';
-import React from 'react';
+import React, { useEffect } from 'react';
+import Router from './router';
 
 const App = (props) => {
     const click = () => {
-        axios.get("http://localhost:8080/user")
+        axios.get("http://localhost:8080/users")
             .then(rs => {
                 console.log(rs.data);
-                alert(rs.data[0].name)
+                // alert(rs.data[0].name)
 
             })
             .catch(err => {
@@ -20,10 +21,7 @@ const App = (props) => {
 
     return (
         <div>
-            app
-            <button onClick={click}>
-                s
-            </button>
+            <Router />
         </div>
 
     );
