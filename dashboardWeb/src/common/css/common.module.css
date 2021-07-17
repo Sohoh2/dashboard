@@ -32,9 +32,11 @@
   vertical-align: center;
 }
 
-.space {
-  margin-top: 4rem;
-  margin-bottom: 4rem;
+/* Position */
+
+.PositionRight {
+  text-align: right;
+  margin: 4rem 0 1rem 0;
 }
 
 .displayFlexSpaceBetween {

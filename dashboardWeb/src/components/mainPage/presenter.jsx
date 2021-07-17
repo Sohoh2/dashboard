@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Container from '../../common/util/container';
 import Commonstyles from '../../common/css/common.module.css';
-import { PageHeader, Table, Tag, Space } from 'antd';
-
+import { PageHeader, Table, Tag, Space, Button } from 'antd';
+import axios from 'axios';
+import { Link } from 'react-router-dom';
 
 const Presenter = (props) => {
     return (
@@ -13,11 +14,7 @@ const Presenter = (props) => {
                     title="Get support"
                     subTitle="24 hours a day, 7 days a week."
                 />
-                <div>
-                    
-
-                </div>
-                    <List/>
+                <List/>
             </Container>
         </>
     );
@@ -25,17 +22,8 @@ const Presenter = (props) => {
 
 export default Presenter;
 
-
-const Buttons = (props) => {
-
-    return (
-        <div>
- 
-        </div>
-    );
-};
-
 const List = (props) => {
+    
     const columns = [
         {
           title: 'SEQ',
@@ -71,28 +59,51 @@ const List = (props) => {
           seq:'1',
           title: 'John Brown',
           registerAt: '2021-7-17',
-          updatedAt:'021-7-18'
+          updatedAt:'2021-7-18'
         },
         {
           key: '2',
           seq:'2',
           title: 'Jim Green',
           registerAt: '2021-7-17',
-          updatedAt:'021-7-18'
+          updatedAt:'2021-7-18'
         },
         {
           key: '3',
           seq:'3',
           title: 'Joe Black',
           registerAt: '2021-7-17',
-          updatedAt:'021-7-18'
+          updatedAt:'2021-7-18'
 
         },
       ];
+
+      useEffect(()=>{
+
+        axios.get("http://localhost:8080/board")
+        .then(rs => {
+            console.log(rs.data);
+            alert(rs.data);
+        })
+        .catch(err => {
+            console.log(err);
+            alert(err);
+        })
+    },[])
       
 
     return (
         <>
+        <div className={Commonstyles.PositionRight}>
+        <Link to='./newPost'>
+            <Button 
+            type="primary"
+            size='large'
+            >
+                New Post
+            </Button>
+            </Link>
+        </div>
         <Table columns={columns} dataSource={data} />
 
 
