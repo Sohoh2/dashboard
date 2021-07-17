@@ -37,7 +37,7 @@ app.get('/what', (req, res) => {
     res.send(req.query)
 })
 
-// API를 만든다.
+// API를 만들기.
 app.get('/users', (req, res) => {
     console.log(req.query)
     const SQL = "SELECT * FROM user"
@@ -56,6 +56,28 @@ app.get('/users', (req, res) => {
 
     })
 })
+
+
+// board API ddd
+app.get('/boards', (req, res) => {
+    console.log(req.query)
+    const SQL = "SELECT * FROM board"
+    connection.query(SQL, function (err, result, fields) {
+        if (err) {
+            console.log(err)
+            res.send({
+                status: 'SELECT FAIL'
+            });
+
+        }
+        else {
+            console.log(result)
+            res.send(result)
+        }
+    })
+})
+
+
 
 app.get('/user', (req, res) => {
     console.log(req.query)
