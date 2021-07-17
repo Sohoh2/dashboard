@@ -1,90 +1,97 @@
 import React, { useEffect, useState } from 'react';
 import Container from '../../common/util/container';
 import Commonstyles from '../../common/css/common.module.css';
-import { PageHeader, Table, Tag, Space, Button,  Form, Input, } from 'antd';
+import { PageHeader, Table, Tag, Space, Button, Form, Input, Row } from 'antd';
 import axios from 'axios';
 
 const Presenter = (props) => {
-    return (
-        <>
-            <Container>
-                <PageHeader
-                    className="site-page-header"
-                    title="New Post"
-                />
-                <PostForm {...props}/>
-            </Container>
-        </>
-    );
+  return (
+    <>
+      <Container>
+        <PageHeader className="site-page-header" title="New Post" />
+        <PostForm {...props} />
+      </Container>
+    </>
+  );
 };
 
 export default Presenter;
 
-const PostForm = (props) => { 
-    const onFinish = (values) => {
-        console.log('Success:', values);
-      };
-    
-      const onFinishFailed = (errorInfo) => {
-        console.log('Failed:', errorInfo);
-      };
+const PostForm = (props) => {
 
-    return (
-        <>
-            <Form
-      name="basic"
-      labelCol={{
-        span: 8,
-      }}
-      wrapperCol={{
-        span: 16,
-      }}
-      initialValues={{
-        remember: true,
-      }}
-      onFinish={onFinish}
-      onFinishFailed={onFinishFailed}
-    >
-      <Form.Item
-        label="Username"
-        name="username"
-        rules={[
-          {
-            required: true,
-            message: 'Please input your username!',
-          },
-        ]}
-      >
-        <Input />
-      </Form.Item>
+    const {newPostBtn} = props
 
-      <Form.Item
-        label="Password"
-        name="password"
-        rules={[
-          {
-            required: true,
-            message: 'Please input your password!',
-          },
-        ]}
-      >
-        <Input.Password />
-      </Form.Item>
+    const [title, setTitle] = useState('');
+    const [contents, setConstents] = useState('');
+    console.log(contents);
 
+  return (
+    <>
 
-      <Form.Item
-        wrapperCol={{
-          offset: 8,
-          span: 16,
+      <Form
+        name="basic"
+        labelCol={{
+          span: 8,
         }}
       >
-        <Button type="primary" htmlType="submit">
-          Submit
-        </Button>
-      </Form.Item>
-    </Form>
+        <Row justify="center" >
+        <Form.Item
+          labelAlign='left'
+          name="title"
+          rules={[
+            {
+              required: true,
+              message: 'Please input title!',
+            },
+          ]}
+        >
+          <Input
+            style={{
+            width:'40rem',
+              height: '3rem',
+              fontSize: '1.2rem',
+            }}
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
+          />
+        </Form.Item>
+        </Row>
+        <Row justify='center'>
 
+        <Form.Item
+        labelAlign='left'
+          name="contents"
+          rules={[
+            {
+              required: true,
+              message: 'Please input contents',
+            },
+          ]}
+        >
+          <Input.TextArea 
+          style={{
+            height: '20rem',
+            width:'40rem',
+            fontSize: '1.2rem' }} 
+            value={contents}
+            onChange={(e) => setConstents(e.target.value)}
 
-        </>
-    );
+            />
+        </Form.Item>
+        </Row>
+        <Row justify='center'>
+
+        <Form.Item
+            >
+          <Button 
+          type="primary"
+            htmlType="submit"
+            onClick={newPostBtn}>
+            New Post
+          </Button>
+        </Form.Item>
+        </Row>
+      </Form>
+    </>
+  );
 };
