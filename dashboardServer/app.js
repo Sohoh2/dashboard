@@ -98,6 +98,29 @@ app.get('/user', (req, res) => {
     })
 })
 
+
+app.get('/board/seq', (req, res) => {
+    console.log(req.query)
+    const SQL = "SELECT * FROM board where seq=?"
+    connection.query(SQL, [req.query.seq], function (err, result, fields) {
+        if (err) {
+            console.log(err)
+            res.send({
+                status: 'SELECT FAIL'
+            });
+
+        }
+        else {
+            console.log(result)
+            res.send(result)
+        }
+
+    })
+})
+
+
+
+
 app.get('/user/:id', (req, res) => {
     console.log(req.params.id)
     const SQL = "SELECT * FROM user where id=?"
@@ -116,6 +139,9 @@ app.get('/user/:id', (req, res) => {
 
     })
 })
+
+
+// INSERT 
 
 app.post('/user', (req, res) => {
     console.log(req.body.name)
@@ -137,12 +163,54 @@ app.post('/user', (req, res) => {
     })
 })
 
+app.post('/board', (req, res) => {
+    console.log(req.body.title)
+    console.log(req.body.content)
+    const SQL = "INSERT into board(title, content) values(?,?)"
+    connection.query(SQL, [req.body.title, req.body.content], function (err, result, fields) {
+        if (err) {
+            console.log(err)
+            res.send({
+                status: 'SELECT FAIL'
+            });
+
+        }
+        else {
+            console.log(result)
+            res.send(result)
+        }
+
+    })
+})
+
+
+// update
 
 app.put('/user', (req, res) => {
     console.log(req.body.name)
     console.log(req.body.age)
     const SQL = "UPDATE user set name=?,age=? where id=?"
     connection.query(SQL, [req.body.name, req.body.age, req.body.id], function (err, result, fields) {
+        if (err) {
+            console.log(err)
+            res.send({
+                status: 'SELECT FAIL'
+            });
+
+        }
+        else {
+            console.log(result)
+            res.send(result)
+        }
+
+    })
+})
+
+app.put('/board', (req, res) => {
+    console.log(req.body.name)
+    console.log(req.body.age)
+    const SQL = "UPDATE board set title=?,content=?,register_at=?,update_at=? where seq=?"
+    connection.query(SQL, [req.body.title, req.body.content, req.body.register_at, req.body.update_at, req.body.seq], function (err, result, fields) {
         if (err) {
             console.log(err)
             res.send({
