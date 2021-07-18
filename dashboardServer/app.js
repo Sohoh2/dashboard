@@ -99,10 +99,13 @@ app.get('/user', (req, res) => {
 })
 
 
-app.get('/board/seq', (req, res) => {
+
+// seq 
+
+app.get('/board/:seq', (req, res) => {
     console.log(req.query)
     const SQL = "SELECT * FROM board where seq=?"
-    connection.query(SQL, [req.query.seq], function (err, result, fields) {
+    connection.query(SQL, [req.params.seq], function (err, result, fields) {
         if (err) {
             console.log(err)
             res.send({
