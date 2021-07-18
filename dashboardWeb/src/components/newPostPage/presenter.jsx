@@ -1,14 +1,19 @@
 import React, { useEffect, useState } from 'react';
 import Container from '../../common/util/container';
 import Commonstyles from '../../common/css/common.module.css';
-import { PageHeader, Table, Tag, Space, Button, Form, Input, Row } from 'antd';
+import { PageHeader, Table, Tag, Space, Button, Form, Input, Row, Col } from 'antd';
 import axios from 'axios';
 
 const Presenter = (props) => {
+    const {history} = props;
   return (
     <>
       <Container>
-        <PageHeader className="site-page-header" title="New Post" />
+        <PageHeader
+        onBack={() =>  null} 
+        className="site-page-header" 
+        title="New Post"
+        />
         <PostForm {...props} />
       </Container>
     </>
@@ -19,7 +24,9 @@ export default Presenter;
 
 const PostForm = (props) => {
 
-    const {newPostBtn, title, setTitle, contents, setContents} = props
+    const {newPostBtn,
+        deletePost,
+         title, setTitle, contents, setContents} = props
     const formRef = React.useRef();
 
 
@@ -85,18 +92,41 @@ const PostForm = (props) => {
             />
         </Form.Item>
         </Row>
-        <Row justify='center'>
-
         <Form.Item
             >
+                        <Row justify='center' gutter={10}>
+
+
+            <Col>
           <Button 
           type="primary"
             htmlType="submit"
             onClick={newPostBtn}>
-            New Post
+            NEW POST
           </Button>
+          </Col>
+          <Col>
+          <Button 
+          type="primary"
+            htmlType="submit"
+            // onClick={modifyBtn}
+            >
+            MODIFY
+          </Button>
+          </Col>
+          <Col>
+          <Button 
+          type="primary"
+          danger
+        htmlType="submit"
+            onClick={deletePost}
+            >
+            DELETE
+          </Button>
+          </Col>
+          </Row>
+
         </Form.Item>
-        </Row>
       </Form>
     </>
   );

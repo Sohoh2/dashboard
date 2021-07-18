@@ -19,7 +19,7 @@ const Container = (props) => {
 
 
 
-    // Update
+    // CREATE
     const newPostBtn = () =>{
 
         const currDate = new Date();
@@ -58,13 +58,31 @@ const Container = (props) => {
           console.log(err);
         })
       }
-    
-        useEffect(() => {
-                selectPost();
-            
-        },[])
-    
 
+
+
+    //   DELETE
+
+
+    
+    const deletePost = () => {
+        axios.delete(`http://localhost:8080/board/${seq}`)
+        .then(rs =>{
+          alert("게시글이 삭제되었습니다.");
+          history.push('/board');
+  
+        })    
+        .catch (err => {
+          console.log(err);
+        })
+      }
+  
+  
+      
+          useEffect(() => {
+                  selectPost();
+              
+          },[])
 
 
 
@@ -75,9 +93,9 @@ const Container = (props) => {
         setTitle = {setTitle} 
         contents = {contents}
         setContents = {setContents}
-        />
-
-            
-    )};
+        deletePost = {deletePost}  
+        />      
+    )
+};
 
 export default Container;

@@ -71,7 +71,7 @@ const List = (props) => {
     return (
         <>
         <div className={Commonstyles.PositionRight}>
-        <Link to='./newPost'>
+        <Link to='./newPost/:seq'>
             <Button 
             type="primary"
             size='large'
