@@ -10,7 +10,7 @@ const Presenter = (props) => {
     <>
       <Container>
         <PageHeader
-        onBack={() =>  null} 
+        onBack={() =>  history.push('/board')} 
         className="site-page-header" 
         title="New Post"
         />
@@ -26,6 +26,7 @@ const PostForm = (props) => {
 
     const {newPostBtn,
         deletePost,
+        modifyPost,
          title, setTitle, contents, setContents} = props
     const formRef = React.useRef();
 
@@ -109,7 +110,7 @@ const PostForm = (props) => {
           <Button 
           type="primary"
             htmlType="submit"
-            // onClick={modifyBtn}
+            onClick={modifyPost}
             >
             MODIFY
           </Button>
