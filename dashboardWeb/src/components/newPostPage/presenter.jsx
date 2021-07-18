@@ -19,16 +19,24 @@ export default Presenter;
 
 const PostForm = (props) => {
 
-    const {newPostBtn, title, setContents, setTitle, contents} = props
+    const {newPostBtn, title, setTitle, contents, setContents} = props
+    const formRef = React.useRef();
 
 
-    console.log(contents);
+    console.log('컨텐츠????',contents);
     console.log(title)
+
+  useEffect(() => {
+    formRef.current.setFieldsValue({
+      title,
+      contents
+    });
+  })
 
   return (
     <>
-
       <Form
+        ref={formRef}
         name="basic"
         labelCol={{
           span: 8,
@@ -51,7 +59,6 @@ const PostForm = (props) => {
               height: '3rem',
               fontSize: '1.2rem',
             }}
-            value={title}
             onChange={(e) => setTitle(e.target.value)}
           />
         </Form.Item>
@@ -73,7 +80,6 @@ const PostForm = (props) => {
             height: '20rem',
             width:'40rem',
             fontSize: '1.2rem' }} 
-            value={contents}
             onChange={(e) => setContents(e.target.value)}
 
             />

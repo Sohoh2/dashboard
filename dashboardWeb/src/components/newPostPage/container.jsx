@@ -15,7 +15,6 @@ const Container = (props) => {
     const [contents, setContents] = useState('');
     // const [registerAt, setRegistserAt] = useState({now})
 
-    const registerAt = new Date();
 
 
 
@@ -23,10 +22,14 @@ const Container = (props) => {
     // Update
     const newPostBtn = () =>{
 
+        const currDate = new Date();
+        console.log(currDate)
+
+
         const insertData = {
             title: `${title}`,
             content: `${contents}`,
-            registerAt : `${registerAt}`
+            register_at : `${currDate}`
         };
         
         axios.post("http://localhost:8080/board", insertData)
@@ -36,6 +39,7 @@ const Container = (props) => {
         .catch(err => {
             console.log(err);            
         })
+        alert("게시글이 등록되었습니다.");
         history.push('/main')
     }
 
@@ -44,8 +48,8 @@ const Container = (props) => {
     const selectPost = () => {
         axios.get(`http://localhost:8080/board/${seq}`)
         .then(rs =>{
-              setTitle(rs.data.title);
-              setContents(rs.data.content);
+              setTitle(rs.data[0].title);
+              setContents(rs.data[0].content);
               console.log('=>',rs.data.title)
               console.log('seqqqqqqq',seq);
 

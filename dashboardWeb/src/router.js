@@ -10,7 +10,7 @@ const Router = (props) => {
             <Header />
             <Switch>
                 <Route exact path="/" component={MainPage} />
-                <Route exact path="/newPost" component={NewPostPage} />
+                <Route exact path="/newPost/:seq" component={NewPostPage} />
                 <Route component={MainPage} />
             </Switch>
         </BrowserRouter>
