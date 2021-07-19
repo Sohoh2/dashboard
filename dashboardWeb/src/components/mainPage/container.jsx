@@ -11,8 +11,7 @@ const Container = (props) => {
             .then(rs => {
                 console.log(rs);
                 setList(rs.data);
-                console.log('list' , list);
-                console.log('list.title' , list.seq);
+                console.log('list ===> ', list)
                 
             })
             .catch(err => {

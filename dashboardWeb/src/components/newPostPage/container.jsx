@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import Presenter from './presenter';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
+import { spliteDateNTime } from '../../common/function/dateFunctions';
+
 
 const Container = (props) => {
   const { history } = props;
@@ -9,17 +11,18 @@ const Container = (props) => {
   const [mode, setMode] = useState('');
   const [title, setTitle] = useState('');
   const [contents, setContents] = useState('');
-  // const [registerAt, setRegistserAt] = useState({now})
 
   // CREATE
   const newPostBtn = () => {
     const currDate = new Date();
-    console.log(currDate);
+    currDate.setHours(currDate.getHours() + 9)
+    console.log(`${spliteDateNTime(currDate.toISOString()).date} ${spliteDateNTime(currDate.toISOString()).time}`)
+
 
     const insertData = {
       title: `${title}`,
       content: `${contents}`,
-      register_at: `${currDate}`,
+      register_at: `${spliteDateNTime(currDate.toISOString()).date} ${spliteDateNTime(currDate.toISOString()).time}`
     };
 
     axios
@@ -52,15 +55,19 @@ const Container = (props) => {
 
   //UPDATE
   const modifyPost = () => {
-    axios
-      .put('http://localhost:8080/board',{
-          seq, 
-          title, 
-          contents, 
-        }
-      )
-        .then((rs) => {
+    const currDate = new Date();
+    currDate.setHours(currDate.getHours() + 9)
+    console.log(`${spliteDateNTime(currDate.toISOString()).date} ${spliteDateNTime(currDate.toISOString()).time}`)
 
+
+    axios
+      .put('http://localhost:8080/board', {
+        seq,
+        title,
+        contents,
+        update_at: `${spliteDateNTime(currDate.toISOString()).date} ${spliteDateNTime(currDate.toISOString()).time}`
+      })
+      .then((rs) => {
         alert('게시글이 수정되었습니다.');
         history.push('/board');
         selectPost();
@@ -73,9 +80,8 @@ const Container = (props) => {
 
   //   DELETE
   const deletePost = () => {
-    axios
-      .delete(`http://localhost:8080/board/${seq}`)
-      .then((rs) => {
+    axios.delete(`http://localhost:8080/board/${seq}`)
+        .then((rs) => {
         alert('게시글이 삭제되었습니다.');
         history.push('/board');
       })
